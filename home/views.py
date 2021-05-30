@@ -1,5 +1,5 @@
 from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 
 from home.models import Person
@@ -23,6 +23,7 @@ def persons(request):
 
 
 @api_view()
+@permission_classes(['IsAdminUser', ])
 def person(request, person_id):
     try:
         one_person = Person.objects.get(id=person_id)
