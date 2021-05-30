@@ -22,3 +22,8 @@ class PersonSerializer(serializers.ModelSerializer):
             'email': {'write_only': True},
             'name': {'help_text': "this is your name"}
         }
+
+    def validate_name(self, value):
+        if value.lower() == 'admin':
+            raise serializers.ValidationError('name cant be admin')
+        return value
